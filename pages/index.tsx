@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <>
-      <title>ANCONet | Grupo ANCON</title>
+      <title>Comercial Torres</title>
       <div className="flex h-screen">
         <div className="md:w-1/6 max-w-none">
           <Sidebar />

@@ -7,7 +7,7 @@ import HttpClient from "../lib/utils/http_client";
 import { Auditory } from "../lib/types";
 import Sidebar from "../lib/components/sidebar";
 
-const Auditory = () => {
+const AuditoryPage = () => {
   const { auth } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [tableData, setTableData] = useState<Array<Auditory>>([]);
@@ -79,4 +79,4 @@ const Auditory = () => {
   );
 };
 
-export default Auditory;
+export default AuditoryPage;

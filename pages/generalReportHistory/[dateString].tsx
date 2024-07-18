@@ -531,13 +531,13 @@ const GeneralReportHistory = () => {
         solicitude.items.forEach((facture: Facture) => {
           if (
             !Array.from(auxSolicitudesByProject.keys()).includes(
-              facture.project.name
+              facture.project?.name
             )
           ) {
-            auxSolicitudesByProject.set(facture.project.name, [facture]);
+            auxSolicitudesByProject.set(facture.project?.name, [facture]);
           } else {
-            auxSolicitudesByProject.set(facture.project.name, [
-              ...auxSolicitudesByProject.get(facture.project.name),
+            auxSolicitudesByProject.set(facture.project?.name, [
+              ...auxSolicitudesByProject.get(facture.project?.name),
               facture,
             ]);
           }
@@ -669,12 +669,7 @@ const GeneralReportHistory = () => {
                   <td style={{ border: "1px solid", width: 250 }}>
                     {getSoliciter(arraySolicitude, itemIgFac.id)}
                   </td>
-                  <td style={{ border: "1px solid", width: 200 }}>
-                    {itemIgFac.project.name ?? " "}
-                  </td>
-                  <td style={{ border: "1px solid", width: 250 }}>
-                    {itemIgFac.centerCost.name ?? ""}
-                  </td>
+
                   <td style={{ border: "1px solid", width: 200 }}>
                     {itemIgFac.provider.name ?? ""}
                   </td>
@@ -1063,8 +1058,6 @@ const GeneralReportHistory = () => {
                     }}
                   >
                     <th style={{ width: 250 }}>Solicitante</th>
-                    <th style={{ width: 200 }}>Proyecto</th>
-                    <th style={{ width: 250 }}>Centro de Costos</th>
                     <th style={{ width: 200 }}>Proveedor</th>
                     <th style={{ width: 90 }}>Fecha</th>
                     <th style={{ width: 90 }}># Factura</th>
@@ -1237,121 +1230,6 @@ const GeneralReportHistory = () => {
               </tr>
             </tbody>
           </table>
-          <h5 className="text-center mb-4 mt-4 fw-bold">ANTICIPOS</h5>
-          <table style={{ width: "100%" }}>
-            <thead>
-              <tr
-                style={{
-                  border: "1px solid",
-                  fontSize: "11px",
-                  textAlign: "center",
-                  background: "#8c4343",
-                }}
-              >
-                <th style={{ width: 250 }}>Solicitante</th>
-                <th style={{ width: 200 }}>Proyecto</th>
-                <th style={{ width: 250 }}>Centro de Costos</th>
-                <th style={{ width: 200 }}>Proveedor</th>
-                <th style={{ width: 90 }}>Fecha</th>
-                <th style={{ width: 90 }}># Factura</th>
-                <th
-                  style={{
-                    width: 400,
-                  }}
-                >
-                  Detalle
-                </th>
-                <th style={{ width: 150 }}>Valor</th>
-                <th style={{ width: 80 }}>Retencion</th>
-                <th style={{ width: 80 }}>Descuento</th>
-                <th style={{ width: 120 }}>Pagado</th>
-              </tr>
-            </thead>
-          </table>
-          {(solicitudes.get("adv-const") ?? []).length !== 0 && (
-            <>
-              <div id="adv-const">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesByProjects(
-                    solicitudes.get("adv-const"),
-                    advancesByProject
-                  )}
-                </table>
-              </div>
-            </>
-          )}
-
-          {(solicitudes.get("adv-ig") ?? []).length !== 0 && (
-            <>
-              <div id="adv-ig">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(solicitudes.get("adv-ig"), "IG")}
-                  <tbody>
-                    {getTotalValuesRow(solicitudes.get("adv-ig"), "IG")}
-                  </tbody>
-                </table>
-              </div>
-
-              <br />
-            </>
-          )}
-
-          {(solicitudes.get("adv-calderon") ?? []).length !== 0 && (
-            <>
-              <div id="adv-calderon">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(
-                    solicitudes.get("adv-calderon"),
-                    "CALDERON"
-                  )}
-                  <tbody>
-                    {getTotalValuesRow(
-                      solicitudes.get("adv-calderon"),
-                      "CALDERON"
-                    )}
-                  </tbody>
-                </table>
-              </div>
-
-              <br />
-            </>
-          )}
-
-          {(solicitudes.get("adv-balcon") ?? []).length !== 0 && (
-            <>
-              <div id="adv-balcon">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(solicitudes.get("adv-balcon"), "BALCON")}
-                  <tbody>
-                    {getTotalValuesRow(solicitudes.get("adv-balcon"), "BALCON")}
-                  </tbody>
-                </table>
-              </div>
-
-              <br />
-            </>
-          )}
-          {(solicitudes.get("adv-recaudaciones") ?? []).length !== 0 && (
-            <>
-              <div id="adv-recaudaciones">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(
-                    solicitudes.get("adv-recaudaciones"),
-                    "RECAUDACIONES",
-                    true
-                  )}
-                  <tbody>
-                    {getTotalValuesRow(
-                      solicitudes.get("adv-recaudaciones"),
-                      "RECAUDACIONES",
-                      true
-                    )}
-                  </tbody>
-                </table>
-              </div>
-              <br />
-            </>
-          )}
 
           <div
             style={{
