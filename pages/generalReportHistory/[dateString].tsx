@@ -736,12 +736,6 @@ const GeneralReportHistory = () => {
 
   const getCenterCost = (facture: Facture, project: string): string => {
     switch (project) {
-      case "IG":
-        return facture.centerCostIg.name;
-      case "CALDERON":
-        return facture.centerCostCalderon.name;
-      case "BALCON":
-        return facture.centerCostBalcon.name;
       default:
         return "";
     }
@@ -749,14 +743,6 @@ const GeneralReportHistory = () => {
 
   const getProvider = (facture: Facture, project: string): string => {
     switch (project) {
-      case "IG":
-        return facture.providerIg.name;
-      case "CALDERON":
-        return facture.providerCalderon.name;
-      case "BALCON":
-        return facture.providerBalcon.name;
-      case "RECAUDACIONES":
-        return facture.providerRecaudaciones.name;
       default:
         return "";
     }
