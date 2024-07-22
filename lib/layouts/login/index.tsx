@@ -29,6 +29,7 @@ const Login = () => {
     if (response.success) {
       const data = response.data;
       login(data);
+      console.log(formData)
     } else {
       toast.warning(response.message);
     }
