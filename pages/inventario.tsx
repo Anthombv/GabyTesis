@@ -15,7 +15,7 @@ const InventarioPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [tableData, setTableData] = useState<Array<Product>>([]);
   const [itemToDelete, setItemToDelete] = useState<string>(null);
-  const [modalVisible, setModalVisible] = useState<boolean>(true);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
   const loadData = async () => {
