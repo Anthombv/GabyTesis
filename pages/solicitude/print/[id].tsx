@@ -186,13 +186,7 @@ const PrintSolicitude = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {solicitude.items
-                      .sort((a, b) =>
-                        (a.project?.name ?? "").localeCompare(
-                          b.project?.name ?? ""
-                        )
-                      )
-                      .map((item, index) => (
+                    {solicitude.items.map((item, index) => (
                         <>
                           <tr
                             style={{
@@ -201,24 +195,8 @@ const PrintSolicitude = () => {
                             }}
                             key={index}
                           >
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 100,
-                              }}
-                            >
-                              {item.project?.name ?? ""}
-                            </td>
-                            <td
-                              className="p-0"
-                              style={{
-                                border: "1px solid black",
-                                width: 170,
-                              }}
-                            >
-                              {item.centerCost?.name ?? ""}
-                            </td>
+                           
+                            
                             <td
                               className="p-0"
                               style={{
