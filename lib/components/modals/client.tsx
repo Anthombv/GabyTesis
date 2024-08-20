@@ -4,11 +4,11 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/use_auth";
 import theme from "../../styles/theme";
-import { Client, ModalProps, ResponseData } from "../../types";
+import { Beneficiary, ModalProps, ResponseData } from "../../types";
 import HttpClient from "../../utils/http_client";
 import LoadingContainer from "../loading_container";
 
-const initialClient: Client = {
+const initialClient: Beneficiary = {
   beneficiary: "",
   identificationCard: "",
   bank: "",
@@ -19,14 +19,14 @@ const initialClient: Client = {
   typeCard: "",
 };
 
-interface Props extends ModalProps<Client> {
-  initialData?: Client;
+interface Props extends ModalProps<Beneficiary> {
+  initialData?: Beneficiary;
 }
 
 const ClientModal = (props: Props) => {
   const { auth } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
-  const [initialValues, setInitialValues] = useState<Client>(initialClient);
+  const [initialValues, setInitialValues] = useState<Beneficiary>(initialClient);
   const [banks, setBanks] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
 
@@ -83,7 +83,7 @@ const ClientModal = (props: Props) => {
     validateOnBlur: true,
     validateOnChange: true,
     initialValues,
-    onSubmit: async (formData: Client) => {
+    onSubmit: async (formData: Beneficiary) => {
       if (formData.beneficiary === "") {
         toast.warning("El nombre del beneficiario no puede estar vacio");
         return;

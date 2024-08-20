@@ -10,7 +10,7 @@ type Props = {
 const SolicitudeICHistoryPanel = (props: Props) => {
   const [selectedComponent, setSelectedComponent] = useState<
     "1-150" | "151-300"
-  >("151-300");
+  >("1-150");
 
   const handleComponentChange = (
     event: React.ChangeEvent<HTMLSelectElement>

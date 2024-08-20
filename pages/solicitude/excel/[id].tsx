@@ -171,12 +171,8 @@ const ExcelSolicitude = () => {
                 <tbody>
                   {solicitude.items.map((item, index) => (
                     <tr style={{ textAlign: "center" }} key={index}>
-                      <td className="border border-black">
-                        {item.project?.name ?? ""}
-                      </td>
-                      <td className="border border-black">
-                        {item.centerCost?.name ?? ""}
-                      </td>
+                      
+                      
                       <td className="border border-black">
                         {item.provider?.name ?? ""}
                       </td>

@@ -4,18 +4,19 @@ import LoadingContainer from "../lib/components/loading_container";
 import ClientModal from "../lib/components/modals/client";
 import TreeTable, { ColumnData } from "../lib/components/tree_table";
 import { useAuth } from "../lib/hooks/use_auth";
-import { Client, ResponseData } from "../lib/types";
+import { Beneficiary, ResponseData } from "../lib/types";
 import HttpClient from "../lib/utils/http_client";
 import Sidebar from "../lib/components/sidebar";
 import Router from "next/router";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import RoleLayout from "../lib/layouts/role_layout";
 
-const Beneficiary = () => {
+const BeneficiaryPage = () => {
   const { auth } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
-  const [tableData, setTableData] = useState<Array<Client>>([]);
-  const [editingClient, setEditingClient] = useState<Client | null>(null);
+  const [tableData, setTableData] = useState<Array<Beneficiary>>([]);
+  const [editingBeneficiary, setEditingBeneficiary] =
+    useState<Beneficiary | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const loadData = async () => {
@@ -27,7 +28,7 @@ const Beneficiary = () => {
       auth.role
     );
     if (response.success) {
-      const clients: Array<Client> = response.data;
+      const clients: Array<Beneficiary> = response.data;
       setTableData(clients);
     } else {
       toast.warning(response.message);
@@ -79,14 +80,14 @@ const Beneficiary = () => {
 
   const showModal = () => setModalVisible(true);
   const hideModal = async () => {
-    if (editingClient != null) setEditingClient(null);
+    if (editingBeneficiary != null) setEditingBeneficiary(null);
     setModalVisible(false);
     await loadData();
   };
 
   const buttons = {
     edit: (rowData: any) => {
-      setEditingClient(rowData);
+      setEditingBeneficiary(rowData);
       showModal();
     },
     delete: async (rowData: any) => {
@@ -122,7 +123,8 @@ const Beneficiary = () => {
       if (parseInt(cad.charAt(longitud - 1)) == total) {
         document.getElementById("salida").innerHTML = "Cedula correcta!!!";
       } else {
-        document.getElementById("salida").innerHTML = "Cedula Inválida  REVISAR...";
+        document.getElementById("salida").innerHTML =
+          "Cedula Inválida  REVISAR...";
       }
     }
   };
@@ -202,29 +204,29 @@ const Beneficiary = () => {
                   {/* <h3 className="text-center my-4 mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
                     Beneficiarios
                   </h3> */}
-            <p className="my-4    text-center">               
-              <em
-                style={{
-                  color: "#334155",
-                  fontStyle: "normal",
-                  fontSize: "24px",
-                  fontFamily: "Lato",
-                  fontWeight: "bold",
-                }}
-              >
-              BENEFI
-              </em>  
-              <em
-                style={{
-                  color: "#94a3b8",
-                  fontStyle: "normal",
-                  fontSize: "24px",
-                  fontFamily: "Lato"
-                }}
-              >
-              CIARIOS
-              </em>              
-            </p>
+                  <p className="my-4    text-center">
+                    <em
+                      style={{
+                        color: "#334155",
+                        fontStyle: "normal",
+                        fontSize: "24px",
+                        fontFamily: "Lato",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      BENEFI
+                    </em>
+                    <em
+                      style={{
+                        color: "#94a3b8",
+                        fontStyle: "normal",
+                        fontSize: "24px",
+                        fontFamily: "Lato",
+                      }}
+                    >
+                      CIARIOS
+                    </em>
+                  </p>
                   <div>
                     <button
                       className="text-center bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full text-sm"
@@ -252,7 +254,7 @@ const Beneficiary = () => {
                       />
                       <button
                         className="text-center bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full text-sm"
-                        type="button"                        
+                        type="button"
                         name="button"
                         onClick={validar}
                       >
@@ -312,10 +314,10 @@ const Beneficiary = () => {
         <ClientModal
           visible={modalVisible}
           close={hideModal}
-          initialData={editingClient}
-          onDone={async (newUser: Client) => {
+          initialData={editingBeneficiary}
+          onDone={async (newUser: Beneficiary) => {
             const response: ResponseData =
-              editingClient == null
+              editingBeneficiary == null
                 ? await HttpClient(
                     "/api/client",
                     "POST",
@@ -332,7 +334,7 @@ const Beneficiary = () => {
                   );
             if (response.success) {
               toast.success(
-                editingClient == null
+                editingBeneficiary == null
                   ? "Beneficiario creado!"
                   : "Beneficiario actualizado!"
               );
@@ -345,4 +347,4 @@ const Beneficiary = () => {
     </>
   );
 };
-export default Beneficiary;
+export default BeneficiaryPage;

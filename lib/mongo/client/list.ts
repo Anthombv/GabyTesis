@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Client } from "../../types";
-import { ClientModel } from "../schemas";
+import { Beneficiary } from "../../types";
+import { BeneficiaryModel } from "../schemas";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const clients = await ClientModel.find({});
+  const beneficiary = await BeneficiaryModel.find({});
 
   return res.status(200).json({
     message: "Todos los numeros de cuenta",
-    data: clients as Array<Client>,
+    data: beneficiary as Array<Beneficiary>,
     success: true,
   });
 }

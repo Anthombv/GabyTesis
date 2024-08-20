@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Beneficiary } from "../../types";
-import { BeneficiaryModel } from "../schemas";
+import { Product } from "../../types";
+import { ProductModel } from "../schemas";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,11 +9,11 @@ export default async function handler(
   const id = req.query.id as string;
 
   // fetch the posts
-  const beneficiary = await BeneficiaryModel.findById(id)
+  const product = await ProductModel.findById(id)
 
   return res.status(200).json({
-    message: "un beneficiario",
-    data: beneficiary as Beneficiary,
+    message: "un producto",
+    data: product as Product,
     success: true,
   });
 }

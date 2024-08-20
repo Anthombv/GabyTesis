@@ -16,31 +16,8 @@ export default function Home() {
       : Router.push({ pathname: "/solicitude" });
   };
 
-  const handleAdvances = () => {
-    auth.role === 1
-      ? Router.push({ pathname: "/requestsAdvance" })
-      : Router.push({ pathname: "/advance" });
-  };
   const handleHistory = () => {
     Router.push({ pathname: "/solicitudeHistory" });
-  };
-
-  const handleNomina = () => {
-    auth.role === 0 || auth.role === 3 || auth.role === 4 || auth.role === 5
-      ? Router.push({ pathname: "/nomina" })
-      : toast.warning("No tienes permiso para revisar la nomina");
-  };
-
-  const handleAppHolidays = () => {
-    Router.push({ pathname: "/appHolidays" });
-  };
-
-  const handleAppGestion = () => {
-    Router.push({ pathname: "/gestion" });
-  };
-
-  const handleAppGerencia = () => {
-    Router.push({ pathname: "/gerencia" });
   };
 
   const handleAppReportes = () => {

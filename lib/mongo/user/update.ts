@@ -24,13 +24,6 @@ export default async function handler(
           identificationCard: user.identificationCard,
           dateBirth: user.dateBirth,
           age: user.age,
-          dateAdmission: user.dateAdmission,
-          position: user.position,
-          cellphone: user.cellphone,
-          bussines: user.bussines,
-          discount: user.discount,
-          count: user.count,
-          countPermission: user.countPermission,
         }
   );
 

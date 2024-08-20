@@ -2,9 +2,7 @@ import { useState } from "react";
 import Sidebar from "../lib/components/sidebar";
 import { useAuth } from "../lib/hooks/use_auth";
 import ProvidersModal from "../lib/components/modals/providersModal";
-import CenterCostModal from "../lib/components/modals/centerCost";
 import ProyectsModal from "../lib/components/modals/projects";
-import UserModalH from "../lib/components/modals/userM";
 import RoleLayout from "../lib/layouts/role_layout";
 
 const Reportes = () => {
@@ -45,12 +43,7 @@ const Reportes = () => {
           }}
         />
 
-        <CenterCostModal
-          visible={modalVisibleCC}
-          close={() => {
-            setModalVisibleCC(null);
-          }}
-        />
+       
 
         <ProyectsModal
           visible={modalVisibleP}
@@ -59,12 +52,7 @@ const Reportes = () => {
           }}
         />
 
-        <UserModalH
-          visible={modalVisibleU}
-          close={() => {
-            setModalVisibleU(null);
-          }}
-        />
+      
       </RoleLayout>
     </>
   );

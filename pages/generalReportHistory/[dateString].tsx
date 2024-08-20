@@ -5,7 +5,7 @@ import Router from "next/router";
 import { useWindowSize } from "../../lib/hooks/use_window_size";
 import { useReactToPrint } from "react-to-print";
 import LoadingContainer from "../../lib/components/loading_container";
-import { Facture, FactureEmployees, Nomina, Solicitude } from "../../lib/types";
+import { Facture, Solicitude } from "../../lib/types";
 
 const GeneralReportHistory = () => {
   const { auth } = useAuth();
@@ -13,7 +13,7 @@ const GeneralReportHistory = () => {
   const [solicitudes, setSolicitudes] = useState<
     Map<string, Array<Solicitude>>
   >(new Map());
-  const [nomina, setNomina] = useState<Map<string, Array<Nomina>>>(new Map());
+  
   const [values, setValues] = useState<Map<string, number>>(new Map());
   const [solicitudesByProject, setSolicitudesByProject] = useState<
     Map<String, Array<Facture>>
@@ -41,39 +41,9 @@ const GeneralReportHistory = () => {
       let advanceDiscount = 0;
 
       const dateString = Router.query.dateString as string;
-      var nomina: Array<Nomina> =
-        (
-          await HttpClient(
-            "/api/nomina?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
+      
 
-      nomina.forEach((nomina: Nomina) => {
-        nomina.items.forEach((facture: FactureEmployees) => {
-          const valueWithComma = facture.value.replace(",", ".");
-          valueNomina += parseFloat(valueWithComma);
-        });
-      });
-
-      var nominaHistory: Array<Nomina> =
-        (
-          await HttpClient(
-            "/api/nomina/nominaHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      nominaHistory.forEach((nomina: Nomina) => {
-        nomina.items.forEach((facture: FactureEmployees) => {
-          valueNomina += parseFloat(facture.value);
-        });
-      });
-
+      
       //Solicitudes y anticipos sin terminar
       var solicitudesConst: Array<Solicitude> =
         (
@@ -492,8 +462,7 @@ const GeneralReportHistory = () => {
       let concatAdvRecaudaciones = advancesHisRecaudaciones.concat(
         advancesRecaudaciones
       );
-      let concatNomina = nominaHistory.concat(nomina);
-
+     
       setSolicitudes(
         new Map([
           ["const", concatConst],
@@ -509,7 +478,6 @@ const GeneralReportHistory = () => {
           ["adv-recaudaciones", concatAdvRecaudaciones],
         ])
       );
-      setNomina(new Map([["nomina", concatNomina]]));
 
       setValues(
         new Map([
@@ -527,41 +495,11 @@ const GeneralReportHistory = () => {
       );
 
       let auxSolicitudesByProject: Map<String, Array<Facture>> = new Map();
-      concatConst.forEach((solicitude: Solicitude) =>
-        solicitude.items.forEach((facture: Facture) => {
-          if (
-            !Array.from(auxSolicitudesByProject.keys()).includes(
-              facture.project?.name
-            )
-          ) {
-            auxSolicitudesByProject.set(facture.project?.name, [facture]);
-          } else {
-            auxSolicitudesByProject.set(facture.project?.name, [
-              ...auxSolicitudesByProject.get(facture.project?.name),
-              facture,
-            ]);
-          }
-        })
-      );
+  
       setSolicitudesByProject(auxSolicitudesByProject);
 
       let auxAdvancesByProject: Map<String, Array<Facture>> = new Map();
-      concatAdvConst.forEach((solicitude: Solicitude) =>
-        solicitude.items.forEach((facture: Facture) => {
-          if (
-            !Array.from(auxAdvancesByProject.keys()).includes(
-              facture.project.name
-            )
-          ) {
-            auxAdvancesByProject.set(facture.project.name, [facture]);
-          } else {
-            auxAdvancesByProject.set(facture.project.name, [
-              ...auxAdvancesByProject.get(facture.project.name),
-              facture,
-            ]);
-          }
-        })
-      );
+     
       setAdvancesByProject(auxAdvancesByProject);
 
       setLoading(true);
@@ -767,9 +705,7 @@ const GeneralReportHistory = () => {
                     <td style={{ border: "1px solid", width: 250 }}>
                       {getSoliciter(arraySolicitude, itemIgFac.id)}
                     </td>
-                    <td style={{ border: "1px solid", width: 200 }}>
-                      {project ?? itemIgFac.project.name ?? ""}
-                    </td>
+                  
                     {!recaudaciones && (
                       <td style={{ border: "1px solid", width: 250 }}>
                         {getCenterCost(itemIgFac, project) ?? ""}
@@ -895,73 +831,7 @@ const GeneralReportHistory = () => {
     );
   };
 
-  const getNominasRow = (
-    arraySolicitude: Array<Nomina>,
-    project?: string
-  ): Array<JSX.Element> => {
-    let value = 0;
-    const jsxArray: Array<JSX.Element> = [];
-    (arraySolicitude ?? []).forEach((solicitude: Nomina, index: number) => {
-      jsxArray.push(
-        <>
-          <thead>
-            <tr
-              style={{
-                border: "1px solid",
-                fontSize: "11px",
-                textAlign: "center",
-                background: "#8c4343",
-              }}
-            >
-              <th>Colaborador</th>
-              <th>Mes</th>
-              <th>Cedula</th>
-              <th>Departamento</th>
-              <th>Cargo</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody key={index}>
-            {(solicitude?.items ?? []).map(
-              (itemIgFac: FactureEmployees, factureIg: number) => {
-                value += parseFloat(itemIgFac.value);
-                return (
-                  <tr
-                    style={{
-                      border: "1px solid",
-                      fontSize: "11px",
-                      textAlign: "center",
-                    }}
-                    key={factureIg}
-                  >
-                    <td style={{ border: "1px solid", width: "300px" }}>
-                      {itemIgFac.beneficiary ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid", width: "300px" }}>
-                      {solicitude.month ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid" }}>
-                      {itemIgFac.identificationCard}
-                    </td>
-                    <td style={{ border: "1px solid" }}>
-                      {itemIgFac.department ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid" }}>
-                      {itemIgFac.position ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid" }}>
-                      {(itemIgFac.value ?? "").toLocaleString()}
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody>
-        </>
-      );
-    });
-    return jsxArray;
-  };
+
   const fecha = Router.query.dateString;
 
   return (
@@ -1006,44 +876,7 @@ const GeneralReportHistory = () => {
           <h4 className="text-center mb-3 fw-bold">
             REPORTE GERENCIAL {fecha}
           </h4>
-          {(nomina.get("nomina") ?? []).length !== 0 && (
-            <>
-              <h5 className="text-center mb-3 fw-bold">NOMINA</h5>
-              <div id="nomina">
-                <table style={{ width: "100%" }}>
-                  {getNominasRow(nomina.get("nomina"), "nomina")}
-                </table>
-                <br />
-                <table
-                  style={{
-                    border: "1px solid",
-                    fontSize: "11px",
-                    textAlign: "center",
-                    background: "#aed6f1",
-                    width: "100%",
-                  }}
-                >
-                  <thead>
-                    <th className="text-center" style={{ width: "91.3%" }}>
-                      TOTAL NOMINA
-                    </th>
-                    <th
-                      style={{
-                        border: "1px solid",
-                        textAlign: "center",
-                      }}
-                    >
-                      $
-                      {(values.get("valueNomina") ?? "").toLocaleString(
-                        "en-US",
-                        options
-                      )}
-                    </th>
-                  </thead>
-                </table>
-              </div>
-            </>
-          )}
+        
           <h5 className="text-center my-3 fw-bold">SOLICITUDES</h5>
           {(solicitudes.get("const") ?? []).length !== 0 && (
             <>

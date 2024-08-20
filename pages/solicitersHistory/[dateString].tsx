@@ -885,24 +885,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {item.soliciter ?? ""}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.project.name}
-                            </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 200,
-                              }}
-                            >
-                              {facture.centerCost.name ?? ""}
-                            </td>
+                           
                             <td
                               style={{
                                 border: "1px solid",
@@ -949,15 +932,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {facture.observation}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.observationConta}
-                            </td>
+                           
                             <td
                               style={{
                                 border: "1px solid",
@@ -1138,15 +1113,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {item.soliciter ?? ""}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 140,
-                              }}
-                            >
-                              {facture.project.name}
-                            </td>
+                           
 
                             <td
                               style={{
@@ -1185,15 +1152,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {facture.observation}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.observationConta}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1374,15 +1333,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {item.soliciter ?? ""}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 140,
-                              }}
-                            >
-                              {facture.project.name}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1420,15 +1371,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {facture.observation}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.observationConta}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1609,15 +1552,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {item.soliciter ?? ""}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 140,
-                              }}
-                            >
-                              {facture.project.name}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1655,15 +1590,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {facture.observation}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.observationConta}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1844,15 +1771,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {item.soliciter ?? ""}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 140,
-                              }}
-                            >
-                              {facture.project.name}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",
@@ -1890,15 +1809,7 @@ const GeneralReportSoliciter = () => {
                             >
                               {facture.observation}
                             </td>
-                            <td
-                              style={{
-                                border: "1px solid",
-                                padding: "0.25em",
-                                width: 100,
-                              }}
-                            >
-                              {facture.observationConta}
-                            </td>
+                            
                             <td
                               style={{
                                 border: "1px solid",

@@ -62,32 +62,12 @@ const UsersPanel = () => {
       caption: "Cedula o RUC",
     },
     {
-      dataField: "cellphone",
-      caption: "# celular",
-    },
-    {
-      dataField: "countPermission",
-      caption: "Permisos Disponibles",
-    },
-    {
-      dataField: "dateAdmission",
-      caption: "Fecha de Ingreso",
-    },
-    {
-      dataField: "bussines",
-      caption: "Empresa",
-    },
-    {
       dataField: "department",
       caption: "Departamento",
     },
     {
       dataField: "position",
       caption: "Cargo o Puesto",
-    },
-    {
-      dataField: "holidays",
-      caption: "Dias de vacaciones",
     },
     {
       dataField: "role",
@@ -97,19 +77,15 @@ const UsersPanel = () => {
           case "0":
             return "Administrador";
           case "1":
-            return "1";
+            return "Ventas";
           case "2":
-            return "2";
+            return "Jefe de ventas";
           case "3":
-            return "3";
+            return "Contabilidad";
           case "4":
-            return "4";
+            return "Gerente";
           case "5":
-            return "5";
-          case "6":
-            return "6";
-          case "7":
-            return "7";
+            return "Financiero";
           default:
             return "";
         }
@@ -163,6 +139,7 @@ const UsersPanel = () => {
         close={hideModal}
         initialData={editingUser}
         onDone={async (newUser: User) => {
+          console.log(newUser);
           const response: ResponseData =
             editingUser == null
               ? await HttpClient(

@@ -15,14 +15,8 @@ export default async function handler(
     switch (role) {
       case "9":
         return { ...solicitude, applicantDate: FormatedDate() };
-      case "2":
-        return { ...solicitude, accountantDate: FormatedDate() };
-      case "3":
-        return { ...solicitude, treasuryDate: FormatedDate() };
       case "4":
         return { ...solicitude, financialDate: FormatedDate() };
-      case "6":
-        return { ...solicitude, contableAdvanceDate: FormatedDate() };
       default:
         return solicitude;
     }

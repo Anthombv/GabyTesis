@@ -7,17 +7,20 @@ export type AuthContextProps = {
   logout: () => void;
 };
 
+//Datos de respuesta
 export type ResponseData = {
   message?: string;
   data?: any;
   success: boolean;
 };
 
+//Datos del login
 export type LoginData = {
   userName: string;
   password: string;
 };
 
+//Roles del sistema
 export type UserRole =
   | 0
   | 1
@@ -27,6 +30,7 @@ export type UserRole =
   | 5
   | 6
 
+//Datos de los usuarios
 export type User = {
   id?: string;
   userName: string;
@@ -38,55 +42,30 @@ export type User = {
   identificationCard: string;
   dateBirth: string;
   age: number;
-  dateAdmission: string;
-  position: string;
-  bussines: string;
-  cellphone: string;
-  yearsWorked: string;
-  holidays: string;
-  discount: string;
-  count: string;
-  countPermission: number;
 };
 
+//Guarda la url de la imagen de la factura o nota de debito 
+//almacenada en la factura de pago a proveedores
 export type CloudImage = {
   secure_url: string;
 };
 
-export type FactureCenter = {
-  id?: string;
-  name: string;
-  projectId: string;
-};
-
-export type FactureProvider = {
-  id?: string;
-  name: string;
-  email: string;
-};
-
-export type FactureEmployees = {
-  id?: string;
-  beneficiary: string;
-  bank: string;
-  position: string;
-  department: string;
-  identificationCard: string;
-  accountBank: string;
-  accountType: string;
-  typeCard: string;
-  codBank: string;
-  typeProv: string;
-  value: string;
-};
-
+//Bancos existentes
 export type Bank = {
   id?: string;
   bank: string;
   codBank: string;
 };
 
-export type Client = {
+//Datos basicos del proveedor
+export type FactureProvider = {
+  id?: string;
+  name: string;
+  email: string;
+};
+
+//Beneficiarios para el pago de una factura
+export type Beneficiary = {
   id?: string;
   beneficiary: string;
   identificationCard: string;
@@ -98,11 +77,11 @@ export type Client = {
   accountTypeB: string;
 };
 
+
+//Factura de una solicitud de pago a proveedores
 export interface Facture {
   id?: string;
   //Solicitante
-  project: FactureProject;
-  centerCost: FactureCenter;
   provider: FactureProvider;
   email: FactureProvider;
   factureDate: string;
@@ -116,8 +95,6 @@ export interface Facture {
   valueRetention: number;
   valueNet: number;
   documentDelivered: string;
-  observationConta: string;
-  closingSeat: string;
   //tesoreria
   beneficiary: string;
   identificationCard: string;
@@ -125,17 +102,17 @@ export interface Facture {
   accountBank: string;
   accountType: string;
   typeCard: string;
-  accountTypeB: string;
+ // accountTypeB: string;
   codBank: string;
   typeProv: string;
-  numberCheck: string;
-  bankCheck: string;
+  numberCheck: string; //Variable numero de cheque
+  bankCheck: string; //Variable banco de cheque
   discount: number;
   increase: number;
   observationTreasury: string;
   //Financiero
   payments: string;
-  typePayments: string;
+  typePayments: string; //Variable tipo de pago
   //tesoreria 2
   difference: number;
   treasuryFile?: File | CloudImage;
@@ -143,6 +120,7 @@ export interface Facture {
   debitNote: string;
 }
 
+//Comentarios de una solicitud de pago a proveedores
 export type Comment = {
   id?: string;
   userComment: string;
@@ -150,6 +128,7 @@ export type Comment = {
   messageComment: string;
 };
 
+//Solicitudes de pago a proveedores
 export interface Solicitude {
   id?: string;
   number: number;
@@ -157,68 +136,50 @@ export interface Solicitude {
   date: string;
   details: string;
   soliciterState: string;
-  contableState: string;
-  advanceState: string;
-  contableAdvanceState: string;
-  imageTreasuryState: string;
-  paymentTreasuryState: string;
   financialState: string;
   items: Array<Facture>;
   financialDate: string;
-  contableAdvanceDate: string;
-  advanceDate: string;
-  treasuryDate: string;
-  accountantDate: string;
   applicantDate: string;
-  imageTreasuryDate: string;
   itemsComment: Array<Comment>;
 }
 
-export type Nomina = {
-  id?: string;
-  number: number;
-  soliciter: string;
-  soliciterState: string;
-  date: string;
-  details: string;
-  month: string;
-  items: Array<FactureEmployees>;
-  state: string;
+// Definición del tipo para un producto en el inventario
+export type Product = {
+  id?: string;         // Identificador único del producto
+  name: string;       // Nombre del producto
+  price: number;      // Precio del producto
+  stock: number;      // Cantidad en inventario
+  description?: string; // Descripción opcional del producto
+  category: string;   // Categoría del producto
 };
 
-export type Holidays = {
-  id?: string;
-  number: number;
-  soliciter: string;
-  deparmentSoliciter: string;
-  soliciterId?: string;
-  typePermissions: string;
-  details: string;
-  state: string;
-  dateState: string;
-  date: string;
-  dateS: string;
-  dateE: string;
-  requestedDays: number;
-  requestedHour: string;
-  startTime: string;
-  finalTime: string;
-  observation: string;
+// Definición del tipo para un cliente
+export type Customer = {
+  id?: string;         // Identificador único del cliente
+  name: string;       // Nombre del cliente
+  email: string;      // Correo electrónico del cliente
+  phone: string;      // Teléfono del cliente
+  address: string;    // Dirección del cliente
 };
 
-export interface Permission extends Holidays {}
-export interface Loan extends Holidays {}
+// Definición del tipo para una venta
+export type Sale = {
+  id?: string;         // Identificador único de la venta
+  product: Array<Product>;  // Identificador del producto vendido
+  quantity: number;   // Cantidad del producto vendido
+  totalPrice: number; // Precio total de la venta
+  saleDate: string;     // Fecha de la venta
+  customer: Customer; // Datos del cliente comprador
+};
+
 
 //backups
 export type Backup = {
   id?: string;
   solicitude: any | Solicitude;
-  nomina: any | Nomina;
-  holidays: any | Holidays;
-  permission: any | Permission;
-  loan: any | Loan;
 };
 
+//Auditoria del sistema
 export type Auditory = {
   id?: string;
   date: string;

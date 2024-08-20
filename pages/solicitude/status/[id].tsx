@@ -50,17 +50,9 @@ const StatusSolicitude = (props: Props) => {
       formik.values?.applicantDate;
     }
 
-    if (formik.values?.contableState === "Pendiente") {
-      formik.values.accountantDate = "";
-    } else {
-      formik.values?.accountantDate;
-    }
+   
 
-    if (formik.values?.paymentTreasuryState === "Pendiente") {
-      formik.values.treasuryDate = "";
-    } else {
-      formik.values?.treasuryDate;
-    }
+ 
 
     if (formik.values?.financialState === "Pendiente") {
       formik.values.financialDate = "";
@@ -68,23 +60,13 @@ const StatusSolicitude = (props: Props) => {
       formik.values?.financialDate;
     }
 
-    if (formik.values?.imageTreasuryState) {
-      formik.values.imageTreasuryDate = "";
-    } else {
-      formik.values?.imageTreasuryDate;
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     formik.values?.applicantDate,
     formik.values?.soliciterState,
-    formik.values?.contableState,
-    formik.values?.accountantDate,
-    formik.values?.paymentTreasuryState,
-    formik.values?.treasuryDate,
     formik.values?.financialState,
     formik.values?.financialDate,
-    formik.values?.imageTreasuryDate,
-    formik.values?.imageTreasuryState,
   ]);
 
   return (
@@ -151,26 +133,8 @@ const StatusSolicitude = (props: Props) => {
                   }}
                 >Estado - <strong>{formik.values?.soliciterState}</strong> - {formik.values?.applicantDate}
                 </em>
-            <strong>Contabilidad: </strong>
-            <em
-                  style={{
-                    color: "#0f172a",
-                    fontStyle: "normal",
-                    fontSize: "14px",
-                   
-                  }}
-                >Estado - <strong>{formik.values?.contableState}</strong> - {formik.values?.accountantDate}
-                </em>
-            <strong>Tesorería: </strong>
-            <em
-                  style={{
-                    color: "#0f172a",
-                    fontStyle: "normal",
-                    fontSize: "14px",
-                   
-                  }}
-                >Estado - <strong>{formik.values?.paymentTreasuryState}</strong> - {formik.values?.treasuryDate}
-                </em>
+           
+            
             <strong>Financiera: </strong>
             <em
                   style={{
@@ -181,17 +145,7 @@ const StatusSolicitude = (props: Props) => {
                   }}
                 >Estado - <strong>{formik.values?.financialState}</strong> - {formik.values?.financialDate}
                 </em>
-            <strong>Pagos: </strong>
-            <em
-                  style={{
-                    color: "#0f172a",
-                    fontStyle: "normal",
-                    fontSize: "14px",
-                   
-                  }}
-                >Estado - <strong>{formik.values?.imageTreasuryState}</strong> -
-            <strong>{formik.values?.imageTreasuryDate}</strong>
-            </em>            
+
           </div>
           <hr />
           <div className="relative items-end justify-end mt-4">

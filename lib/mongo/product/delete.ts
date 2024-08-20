@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import FormatedDate from "../../utils/formated_date";
-import { AuditoryModel, BeneficiaryModel } from "../schemas";
+import { AuditoryModel, ProductModel } from "../schemas";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,13 +8,13 @@ export default async function handler(
 ) {
   const id = req.query.id as string;
   const userName = req.headers.username as string;
-  const resp = await BeneficiaryModel.findByIdAndRemove(id);
+  const resp = await ProductModel.findByIdAndRemove(id);
   //{ acknowledged: true, deletedCount: 1 }
 
   const auditory = new AuditoryModel({
     date: FormatedDate(),
     user: userName,
-    action: "Eliminó un beneficiario: " + resp.name,
+    action: "Eliminó un Producto: " + resp.name,
   });
   await auditory.save();
 

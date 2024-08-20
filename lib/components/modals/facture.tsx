@@ -2,20 +2,13 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../hooks/use_auth";
-import { Facture, FactureCenter, ModalProps, ResponseData } from "../../types";
+import { Facture, ModalProps, ResponseData } from "../../types";
 import { CheckPermissions } from "../../utils/check_permissions";
 import HttpClient from "../../utils/http_client";
 
 const initialFacture: Facture = {
   id: null,
   //Solicitante
-  project: {
-    name: "",
-  },
-  centerCost: {
-    name: "",
-    projectId: "",
-  },
   provider: {
     name: "",
     email: "",
@@ -38,15 +31,12 @@ const initialFacture: Facture = {
   valueRetention: 0,
   valueNet: 0,
   documentDelivered: "",
-  closingSeat: "",
-  observationConta: "",
   //Tesoreria
   beneficiary: "",
   identificationCard: "",
   bank: "",
   accountBank: "",
   accountType: "",
-  accountTypeB: "",
   numberCheck: "",
   bankCheck: "",
   discount: 0,
@@ -75,7 +65,6 @@ const FactureModal = (props: Props) => {
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionsP, setSuggestionsP] = useState([]);
 
-  const [filteredCenters, setFilteredCenters] = useState<FactureCenter[]>([]);
 
   const loadClients = async () => {
     const response: ResponseData = await HttpClient(
@@ -148,7 +137,6 @@ const FactureModal = (props: Props) => {
   const handleClose = () => {
     formik.resetForm({ values: initialFacture });
     setImage(null);
-    setFilteredCenters([]);
     props.close();
   };
 
