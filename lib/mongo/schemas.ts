@@ -265,7 +265,7 @@ const SaleSchema = new mongoose.Schema<Sale>(
     quantity: { type: Number },
     totalPrice: { type: Number },
     saleDate: { type: String },
-    customer: { type: String },
+    customer: { type: CustomerSchema },
   },
   { timestamps: true }
 );

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import read from "../../../lib/mongo/clientes/read";
-import remove from "../../../lib/mongo/clientes/delete";
+import read from "../../../lib/mongo/beneficiary/read";
+import remove from "../../../lib/mongo/beneficiary/delete";
 import dbConnect from "../../../lib/middlewares/mongo";
 
 export default async function handler(

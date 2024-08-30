@@ -6,9 +6,14 @@ import Sidebar from "../lib/components/sidebar";
 import { useAuth } from "../lib/hooks/use_auth";
 import { toast } from "react-toastify";
 import { CheckPermissions } from "../lib/utils/check_permissions";
+import GeneralReportModal from "../lib/components/modals/generalReport";
+import { useState } from "react";
 
 export default function Home() {
   const { auth } = useAuth();
+  const [modalVisibleGR, setModalVisibleGR] = useState<boolean>(false);
+
+  const showModalGR = () => setModalVisibleGR(true);
 
   const handleSolicitudes = () => {
     auth.role === 1
@@ -28,6 +33,9 @@ export default function Home() {
     Router.push({ pathname: "/ventas" });
   };
 
+  const handleAppInventario = () => {
+    Router.push({ pathname: "/inventario" });
+  };
   return (
     <>
       <title>Comercial Torres</title>
@@ -168,7 +176,7 @@ export default function Home() {
                   <li>
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
-                      onClick={handleAppVentas}
+                      onClick={handleAppInventario}
                       disabled={!CheckPermissions(auth, [0, 1, 2])}
                     >
                       Ir al Inventario
@@ -222,10 +230,10 @@ export default function Home() {
                   <li>
                     <button
                       className="p-1 md:text-md rounded-full hover:bg-slate-300 text-gray-600 px-8 bg-slate-200 m-2"
-                      onClick={handleAppReportes}
+                      onClick={showModalGR}
                       disabled={!CheckPermissions(auth, [0, 1])}
                     >
-                      Ir al Aplicativo
+                      Reporte de solicitudes de pagos
                     </button>
                   </li>
                 </ul>
@@ -234,6 +242,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <GeneralReportModal
+        visible={modalVisibleGR}
+        close={() => {
+          setModalVisibleGR(null);
+        }}
+      />
     </>
   );
 }

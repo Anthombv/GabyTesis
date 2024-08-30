@@ -13,20 +13,11 @@ const GeneralReportHistory = () => {
   const [solicitudes, setSolicitudes] = useState<
     Map<string, Array<Solicitude>>
   >(new Map());
-  
+
   const [values, setValues] = useState<Map<string, number>>(new Map());
   const [solicitudesByProject, setSolicitudesByProject] = useState<
     Map<String, Array<Facture>>
   >(new Map());
-  const [advancesByProject, setAdvancesByProject] = useState<
-    Map<String, Array<Facture>>
-  >(new Map());
-
-  const windowSize = useWindowSize();
-  const componentRef = useRef(null);
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
 
   const loadData = async () => {
     if (Router.asPath !== Router.route) {
@@ -35,15 +26,9 @@ const GeneralReportHistory = () => {
       let valueNet = 0;
       let discount = 0;
       let valueNomina = 0;
-      let advanceValue = 0;
-      let advanceValueRetention = 0;
-      let advanceValueNet = 0;
-      let advanceDiscount = 0;
 
       const dateString = Router.query.dateString as string;
-      
 
-      
       //Solicitudes y anticipos sin terminar
       var solicitudesConst: Array<Solicitude> =
         (
@@ -60,177 +45,6 @@ const GeneralReportHistory = () => {
           valueRetention += facture.valueRetention;
           valueNet += facture.valueNet;
           discount += facture.discount;
-        });
-      });
-
-      var solicitudesIg: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeInmogestion?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesIg.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          valueNet += facture.valueNet;
-          discount += facture.discount;
-        });
-      });
-
-      var solicitudesCalderon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeCalderon?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesCalderon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          valueNet += facture.valueNet;
-          discount += facture.discount;
-        });
-      });
-
-      var solicitudesBalcon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeBalcon?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesBalcon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          valueNet += facture.valueNet;
-          discount += facture.discount;
-        });
-      });
-
-      var solicitudesRecaudaciones: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeRecaudaciones?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesRecaudaciones.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          discount += facture.discount;
-          valueNet += facture.valueNet;
-        });
-      });
-
-      var advancesConst: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advance?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesConst.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesIg: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceInmogestion?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesIg.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesCalderon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceCalderon?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesCalderon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceValueNet += facture.valueNet;
-          advanceDiscount += facture.discount;
-        });
-      });
-
-      var advancesBalcon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceBalcon?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesBalcon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesRecaudaciones: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceRecaudaciones?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesRecaudaciones.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
         });
       });
 
@@ -273,212 +87,13 @@ const GeneralReportHistory = () => {
         });
       });
 
-      var solicitudesHisIg: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeInmogestion/solicitudeHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesHisIg.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          discount += facture.discount;
-          valueNet += facture.valueNet;
-        });
-      });
-
-      var solicitudesHisCalderon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeCalderon/solicitudeHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesHisCalderon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          discount += facture.discount;
-          valueNet += facture.valueNet;
-        });
-      });
-
-      var solicitudesHisBalcon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeBalcon/solicitudeHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesHisBalcon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          discount += facture.discount;
-          valueNet += facture.valueNet;
-        });
-      });
-
-      var solicitudesHisRecaudaciones: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/solicitudeRecaudaciones/solicitudeHistory?dates=" +
-              dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      solicitudesHisRecaudaciones.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          value += facture.value;
-          valueRetention += facture.valueRetention;
-          valueNet += facture.valueNet;
-          discount += facture.discount;
-        });
-      });
-
-      var advancesHisConst: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advance/advanceHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesHisConst.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesHisIg: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceInmogestion/advanceHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesHisIg.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesHisCalderon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceCalderon/advanceHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesHisCalderon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesHisBalcon: Array<Solicitude> =
-        (
-          await HttpClient(
-            "/api/advanceBalcon/advanceHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesHisBalcon.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
-      var advancesHisRecaudaciones =
-        (
-          await HttpClient(
-            "/api/advanceRecaudaciones/advanceHistory?dates=" + dateString,
-            "GET",
-            auth.userName,
-            auth.role
-          )
-        ).data ?? [];
-
-      advancesHisRecaudaciones.forEach((solicitude: Solicitude) => {
-        solicitude.items.forEach((facture: Facture) => {
-          advanceValue += facture.value;
-          advanceValueRetention += facture.valueRetention;
-          advanceDiscount += facture.discount;
-          advanceValueNet += facture.valueNet;
-        });
-      });
-
       let concatConst = solicitudesHisConst.concat(
         solicitudesConst,
         solicitudesHisConst150
       );
-      let concatIg = solicitudesHisIg.concat(solicitudesIg);
-      let concatCalderon = solicitudesHisCalderon.concat(solicitudesCalderon);
-      let concatBalcon = solicitudesHisBalcon.concat(solicitudesBalcon);
-      let concatRecaudaciones = solicitudesHisRecaudaciones.concat(
-        solicitudesRecaudaciones
-      );
-      let concatAdvConst = advancesHisConst.concat(advancesConst);
-      let concatAdvIg = advancesHisIg.concat(advancesIg);
-      let concatAdvCalderon = advancesHisCalderon.concat(advancesCalderon);
-      let concatAdvBalcon = advancesHisBalcon.concat(advancesBalcon);
-      let concatAdvRecaudaciones = advancesHisRecaudaciones.concat(
-        advancesRecaudaciones
-      );
-     
-      setSolicitudes(
-        new Map([
-          ["const", concatConst],
-          ["ig", concatIg],
-          ["calderon", concatCalderon],
-          ["balcon", concatBalcon],
-          ["recaudaciones", concatRecaudaciones],
 
-          ["adv-const", concatAdvConst],
-          ["adv-ig", concatAdvIg],
-          ["adv-calderon", concatAdvCalderon],
-          ["adv-balcon", concatAdvBalcon],
-          ["adv-recaudaciones", concatAdvRecaudaciones],
-        ])
-      );
-
+      setSolicitudes(new Map([["const", concatConst]]));
+      console.log(solicitudes);
       setValues(
         new Map([
           ["value", value],
@@ -486,21 +101,13 @@ const GeneralReportHistory = () => {
           ["discount", discount],
           ["valueNet", valueNet],
           ["valueNomina", valueNomina],
-
-          ["adv-value", advanceValue],
-          ["adv-valueRetention", advanceValueRetention],
-          ["adv-discount", advanceDiscount],
-          ["adv-valueNet", advanceValueNet],
         ])
       );
 
       let auxSolicitudesByProject: Map<String, Array<Facture>> = new Map();
-  
-      setSolicitudesByProject(auxSolicitudesByProject);
 
-      let auxAdvancesByProject: Map<String, Array<Facture>> = new Map();
-     
-      setAdvancesByProject(auxAdvancesByProject);
+      setSolicitudesByProject(auxSolicitudesByProject);
+      console.log(solicitudesByProject);
 
       setLoading(true);
     } else {
@@ -591,6 +198,8 @@ const GeneralReportHistory = () => {
   ): Array<JSX.Element> => {
     const jsxArray: Array<JSX.Element> = [];
     arrayByProject.forEach((factures: Array<Facture>, project: string) => {
+      console.log(arrayByProject);
+      console.log(arrayByProject);
       jsxArray.push(
         <>
           <tbody key={project}>
@@ -626,7 +235,7 @@ const GeneralReportHistory = () => {
                   >
                     {itemIgFac.details ?? ""}
                   </td>
-                  <td style={{ border: "1px solid", width: 150 }}>
+                  <td style={{ border: "1px solid" }}>
                     {(itemIgFac.value ?? "").toLocaleString("en-US", options)}
                   </td>
                   <td style={{ border: "1px solid", width: 80 }}>
@@ -660,179 +269,19 @@ const GeneralReportHistory = () => {
               {projectFacturesTotal(factures, project)}
             </tr>
           </tbody>
-          <br /> {/* TODO check */}
+          <br />
         </>
       );
     });
     return jsxArray;
   };
-
-  const getCenterCost = (facture: Facture, project: string): string => {
-    switch (project) {
-      default:
-        return "";
-    }
-  };
-
-  const getProvider = (facture: Facture, project: string): string => {
-    switch (project) {
-      default:
-        return "";
-    }
-  };
-
-  const getSolicitudesRow = (
-    arraySolicitude: Array<Solicitude>,
-    project?: string,
-    recaudaciones: boolean = false
-  ): Array<JSX.Element> => {
-    const jsxArray: Array<JSX.Element> = [];
-    (arraySolicitude ?? []).forEach((solicitude: Solicitude, index: number) => {
-      jsxArray.push(
-        <>
-          <tbody key={index}>
-            {(solicitude?.items ?? []).map(
-              (itemIgFac: Facture, factureIg: number) => {
-                return (
-                  <tr
-                    style={{
-                      border: "1px solid",
-                      fontSize: "11px",
-                      textAlign: "center",
-                    }}
-                    key={factureIg}
-                  >
-                    <td style={{ border: "1px solid", width: 250 }}>
-                      {getSoliciter(arraySolicitude, itemIgFac.id)}
-                    </td>
-                  
-                    {!recaudaciones && (
-                      <td style={{ border: "1px solid", width: 250 }}>
-                        {getCenterCost(itemIgFac, project) ?? ""}
-                      </td>
-                    )}
-                    <td style={{ border: "1px solid", width: 200 }}>
-                      {getProvider(itemIgFac, project) ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid", width: 90 }}>
-                      {itemIgFac.factureDate ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid ", width: 90 }}>
-                      {itemIgFac.factureNumber ?? ""}
-                    </td>
-                    <td
-                      style={{
-                        border: "1px solid",
-                        width: 400,
-                        textAlign: "left",
-                      }}
-                    >
-                      {itemIgFac.details ?? ""}
-                    </td>
-                    <td style={{ border: "1px solid", width: 150 }}>
-                      {(itemIgFac.value ?? "").toLocaleString("en-US", options)}
-                    </td>
-                    <td style={{ border: "1px solid", width: 80 }}>
-                      {(itemIgFac.valueRetention ?? "").toLocaleString(
-                        "en-US",
-                        options
-                      )}
-                    </td>
-                    <td style={{ border: "1px solid", width: 80 }}>
-                      {(itemIgFac.discount ?? "").toLocaleString(
-                        "en-US",
-                        options
-                      )}
-                    </td>
-                    <td style={{ border: "1px solid", width: 120 }}>
-                      {(itemIgFac.valueNet ?? "").toLocaleString(
-                        "en-US",
-                        options
-                      )}
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-          </tbody>
-        </>
-      );
-    });
-    return jsxArray;
-  };
-
-  const getTotalValuesRow = (
-    arraySolicitudes: Array<Solicitude>,
-    project: string,
-    recaudaciones: boolean = false
-  ): JSX.Element => {
-    let value = 0;
-    let valueRetention = 0;
-    let valueNet = 0;
-    let discount = 0;
-
-    (arraySolicitudes ?? []).forEach((solicitude: Solicitude) =>
-      solicitude.items.forEach((facture: Facture) => {
-        value += facture.value;
-        valueRetention += facture.valueRetention;
-        valueNet += facture.valueNet;
-        discount += facture.discount;
-      })
-    );
-
-    return (
-      <tr
-        style={{
-          border: "1px solid",
-          fontSize: "11px",
-          textAlign: "center",
-        }}
-      >
-        <th
-          colSpan={recaudaciones ? 6 : 7}
-          style={{
-            border: "1px solid",
-            width: 400,
-            textAlign: "center",
-            backgroundColor: "#aed6f1",
-          }}
-        >
-          TOTAL {project}
-        </th>
-        <th
-          style={{
-            border: "1px solid",
-            width: 150,
-            backgroundColor: "#aed6f1",
-          }}
-        >
-          ${(value ?? "").toLocaleString("en-US", options)}
-        </th>
-        <th
-          style={{ border: "1px solid", width: 80, backgroundColor: "#aed6f1" }}
-        >
-          ${(valueRetention ?? "").toLocaleString("en-US", options)}
-        </th>
-        <th
-          style={{ border: "1px solid", width: 80, backgroundColor: "#aed6f1" }}
-        >
-          ${(discount ?? "").toLocaleString("en-US", options)}
-        </th>
-        <th
-          style={{
-            border: "1px solid",
-            width: 120,
-            backgroundColor: "#aed6f1",
-          }}
-        >
-          ${(valueNet ?? "").toLocaleString("en-US", options)}
-        </th>
-      </tr>
-    );
-  };
-
 
   const fecha = Router.query.dateString;
+
+  solicitudes.forEach((value, key) => {
+    console.log(`Clave: ${key}`);
+    console.log("Valores:", value);
+  });
 
   return (
     <>
@@ -876,107 +325,99 @@ const GeneralReportHistory = () => {
           <h4 className="text-center mb-3 fw-bold">
             REPORTE GERENCIAL {fecha}
           </h4>
-        
-          <h5 className="text-center my-3 fw-bold">SOLICITUDES</h5>
-          {(solicitudes.get("const") ?? []).length !== 0 && (
-            <>
-              <table style={{ width: "100%" }}>
-                <thead>
-                  <tr
-                    style={{
-                      border: "1px solid",
-                      fontSize: "11px",
-                      textAlign: "center",
-                      background: "#8c4343",
-                    }}
-                  >
-                    <th style={{ width: 250 }}>Solicitante</th>
-                    <th style={{ width: 200 }}>Proveedor</th>
-                    <th style={{ width: 90 }}>Fecha</th>
-                    <th style={{ width: 90 }}># Factura</th>
-                    <th
-                      style={{
-                        width: 400,
-                      }}
-                    >
-                      Detalle
-                    </th>
-                    <th style={{ width: 150 }}>Valor</th>
-                    <th style={{ width: 80 }}>Retencion</th>
-                    <th style={{ width: 80 }}>Descuento</th>
-                    <th style={{ width: 120 }}>Pagado</th>
-                  </tr>
-                </thead>
-              </table>
-              <div id="const">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesByProjects(
-                    solicitudes.get("const"),
-                    solicitudesByProject
-                  )}
-                </table>
-              </div>
-            </>
-          )}
-          {(solicitudes.get("ig") ?? []).length !== 0 && (
-            <>
-              <div id="ig">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(solicitudes.get("ig"), "IG")}
-                  <tbody>
-                    {getTotalValuesRow(solicitudes.get("ig"), "IG")}
-                  </tbody>
-                </table>
-              </div>
-              <br />
-            </>
-          )}
-          {(solicitudes.get("calderon") ?? []).length !== 0 && (
-            <>
-              <div id="calderon">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(solicitudes.get("calderon"), "CALDERON")}
-                  <tbody>
-                    {getTotalValuesRow(solicitudes.get("calderon"), "CALDERON")}
-                  </tbody>
-                </table>
-              </div>
-              <br />
-            </>
-          )}
-          {(solicitudes.get("balcon") ?? []).length !== 0 && (
-            <>
-              <div id="balcon">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(solicitudes.get("balcon"), "BALCON")}
-                  <tbody>
-                    {getTotalValuesRow(solicitudes.get("balcon"), "BALCON")}
-                  </tbody>
-                </table>
-              </div>
-              <br />
-            </>
-          )}
-          {(solicitudes.get("recaudaciones") ?? []).length !== 0 && (
-            <>
-              <div id="recaudaciones">
-                <table style={{ width: "100%" }}>
-                  {getSolicitudesRow(
-                    solicitudes.get("recaudaciones"),
-                    "RECAUDACIONES",
-                    true
-                  )}
-                  <tbody>
-                    {getTotalValuesRow(
-                      solicitudes.get("recaudaciones"),
-                      "RECAUDACIONES",
-                      true
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          )}
+
+          <h5 className="text-center my-3 fw-bold">SOLICITUDES DE PAGO A PROVEEDORES</h5>
+
+          <table style={{ width: "100%" }}>
+            <thead>
+              <tr
+                style={{
+                  border: "1px solid",
+                  fontSize: "11px",
+                  textAlign: "center",
+                  background: "#8c4343",
+                }}
+              >
+                <th>Solicitante</th>
+                <th>Proveedor</th>
+                <th>Fecha</th>
+                <th># Factura</th>
+                <th>Detalle</th>
+                <th>Valor</th>
+                <th>Retencion</th>
+                <th>Descuento</th>
+                <th>Pagado</th>
+              </tr>
+              <tr>
+                <td style={{ border: "1px solid" }}>conta</td>
+                <td style={{ border: "1px solid" }}>GABRIELA TORRES</td>
+                <td style={{ border: "1px solid" }}>2024-10-10</td>
+                <td style={{ border: "1px solid" }}>123</td>
+                <td style={{ border: "1px solid" }}>
+                  Pago por servicios profesionales
+                </td>
+                <td style={{ border: "1px solid" }}>500</td>
+                <td style={{ border: "1px solid" }}>10</td>
+                <td style={{ border: "1px solid" }}>10</td>
+                <td style={{ border: "1px solid" }}>Aprobado</td>
+              </tr>
+              <tr>
+                <td style={{ border: "1px solid" }}>conta</td>
+                <td style={{ border: "1px solid" }}>ALEXANDRA PEREZ</td>
+                <td style={{ border: "1px solid" }}>2024-10-10</td>
+                <td style={{ border: "1px solid" }}>65879</td>
+                <td style={{ border: "1px solid" }}>asd</td>
+                <td style={{ border: "1px solid" }}>600</td>
+                <td style={{ border: "1px solid" }}>25</td>
+                <td style={{ border: "1px solid" }}>0</td>
+                <td style={{ border: "1px solid" }}></td>
+              </tr>
+              <tr>
+                <td style={{ border: "1px solid" }}>conta</td>
+                <td style={{ border: "1px solid" }}>LAGANGA</td>
+                <td style={{ border: "1px solid" }}>2024-07-17</td>
+                <td style={{ border: "1px solid" }}>4569871</td>
+                <td style={{ border: "1px solid" }}>Pago Camaras</td>
+                <td style={{ border: "1px solid" }}>520</td>
+                <td style={{ border: "1px solid" }}>25</td>
+                <td style={{ border: "1px solid" }}>0</td>
+                <td style={{ border: "1px solid" }}>Aprobado</td>
+              </tr>
+              <tr>
+                <td style={{ border: "1px solid" }}>admin</td>
+                <td style={{ border: "1px solid" }}>MARIA BELEN MORA</td>
+                <td style={{ border: "1px solid" }}>2024-02-10</td>
+                <td style={{ border: "1px solid" }}>65478</td>
+                <td style={{ border: "1px solid" }}>Pago tesis</td>
+                <td style={{ border: "1px solid" }}>500</td>
+                <td style={{ border: "1px solid" }}>10</td>
+                <td style={{ border: "1px solid" }}>0</td>
+                <td style={{ border: "1px solid" }}></td>
+              </tr>
+
+              <tr>
+                <td style={{ border: "1px solid" }}>admin</td>
+                <td style={{ border: "1px solid" }}>MARIA BELEN MORA</td>
+                <td style={{ border: "1px solid" }}>2024-02-10</td>
+                <td style={{ border: "1px solid" }}>65478</td>
+                <td style={{ border: "1px solid" }}>Pago tesis</td>
+                <td style={{ border: "1px solid" }}>500</td>
+                <td style={{ border: "1px solid" }}>10</td>
+                <td style={{ border: "1px solid" }}>0</td>
+                <td style={{ border: "1px solid" }}></td>
+              </tr>
+            </thead>
+          </table>
+
+          <div id="const">
+            <table style={{ width: "100%" }}>
+              {getSolicitudesByProjects(
+                solicitudes.get("const"),
+                solicitudesByProject
+              )}
+            </table>
+          </div>
+
           <br />
           <table border={1} width="100%">
             <thead>
@@ -1048,7 +489,7 @@ const GeneralReportHistory = () => {
                 >
                   TOTAL SOLICITUDES
                 </th>
-                <th style={{ border: "1px solid", width: 150 }}>
+                <th style={{ border: "1px solid" }}>
                   ${(values.get("value") ?? "").toLocaleString()}
                 </th>
                 <th style={{ border: "1px solid", width: 80 }}>
@@ -1063,150 +504,6 @@ const GeneralReportHistory = () => {
               </tr>
             </tbody>
           </table>
-
-          <div
-            style={{
-              marginBottom: "2em",
-              marginTop: "2em",
-            }}
-          >
-            <table border={1} width="100%">
-              <thead>
-                <tr
-                  style={{
-                    border: "1px solid white",
-                    fontSize: "11px",
-                    textAlign: "center",
-                    background: "#8c4343",
-                  }}
-                >
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th style={{ backgroundColor: "white" }}></th>
-                  <th
-                    style={{
-                      backgroundColor: "#aed6f1",
-                      border: "1px solid black",
-                    }}
-                  >
-                    VALOR SOLICITADO
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "#aed6f1",
-                      border: "1px solid black",
-                    }}
-                  >
-                    VALOR RETENIDO
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "#aed6f1",
-                      border: "1px solid black",
-                    }}
-                  >
-                    VALOR DESCONTADO
-                  </th>
-                  <th
-                    style={{
-                      backgroundColor: "#28b463",
-                      border: "1px solid black",
-                    }}
-                  >
-                    VALOR A PAGAR
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  style={{
-                    border: "1px solid",
-                    fontSize: "11px",
-                    textAlign: "center",
-                    backgroundColor: "#aed6f1",
-                  }}
-                >
-                  <th
-                    colSpan={7}
-                    style={{
-                      border: "1px solid",
-                      width: 400,
-                      textAlign: "center",
-                    }}
-                  >
-                    TOTAL ANTICIPOS
-                  </th>
-                  <th style={{ border: "1px solid", width: 150 }}>
-                    ${(values.get("adv-value") ?? "").toLocaleString()}
-                  </th>
-                  <th style={{ border: "1px solid", width: 80 }}>
-                    ${(values.get("adv-valueRetention") ?? "").toLocaleString()}
-                  </th>
-                  <th style={{ border: "1px solid", width: 80 }}>
-                    ${(values.get("adv-discount") ?? "").toLocaleString()}
-                  </th>
-                  <th style={{ border: "1px solid", width: 120 }}>
-                    ${(values.get("adv-valueNet") ?? "").toLocaleString()}
-                  </th>
-                </tr>
-              </tbody>
-              <br />
-              <tbody>
-                <tr
-                  style={{
-                    border: "1px solid",
-                    fontSize: "11px",
-                    textAlign: "center",
-                    backgroundColor: "#f5b041",
-                  }}
-                >
-                  <th
-                    colSpan={7}
-                    style={{
-                      border: "1px solid",
-                      textAlign: "center",
-                      width: 400,
-                    }}
-                  >
-                    TOTAL GENERAL
-                  </th>
-                  <th style={{ border: "1px solid", width: 150 }}>
-                    $
-                    {(
-                      values.get("value") +
-                      values.get("adv-value") +
-                      values.get("valueNomina")
-                    ).toLocaleString() ?? ""}
-                  </th>
-                  <th style={{ border: "1px solid", width: 80 }}>
-                    $
-                    {(
-                      values.get("valueRetention") +
-                      values.get("adv-valueRetention")
-                    ).toLocaleString() ?? ""}
-                  </th>
-                  <th style={{ border: "1px solid", width: 80 }}>
-                    $
-                    {(
-                      values.get("discount") + values.get("adv-discount")
-                    ).toLocaleString() ?? ""}
-                  </th>
-                  <th style={{ border: "1px solid", width: 120 }}>
-                    $
-                    {(
-                      values.get("valueNet") +
-                      values.get("adv-valueNet") +
-                      values.get("valueNomina")
-                    ).toLocaleString() ?? ""}
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </div>
       </LoadingContainer>
     </>

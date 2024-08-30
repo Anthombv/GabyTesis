@@ -90,19 +90,16 @@ export interface Facture {
   value: number;
   file?: File | CloudImage;
   observation: string;
-  //contabilidad
   numberRetention: number;
   valueRetention: number;
   valueNet: number;
   documentDelivered: string;
-  //tesoreria
   beneficiary: string;
   identificationCard: string;
   bank: string;
   accountBank: string;
   accountType: string;
   typeCard: string;
- // accountTypeB: string;
   codBank: string;
   typeProv: string;
   numberCheck: string; //Variable numero de cheque
@@ -113,7 +110,6 @@ export interface Facture {
   //Financiero
   payments: string;
   typePayments: string; //Variable tipo de pago
-  //tesoreria 2
   difference: number;
   treasuryFile?: File | CloudImage;
   accreditedPayment: number;
@@ -166,12 +162,11 @@ export type Customer = {
 export type Sale = {
   id?: string;         // Identificador único de la venta
   product: Array<Product>;  // Identificador del producto vendido
-  quantity: number;   // Cantidad del producto vendido
+  quantity: number;   // Cantidad de producto vendido
   totalPrice: number; // Precio total de la venta
   saleDate: string;     // Fecha de la venta
   customer: Customer; // Datos del cliente comprador
 };
-
 
 //backups
 export type Backup = {

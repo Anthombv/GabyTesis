@@ -4,34 +4,34 @@ import RoleLayout from "../lib/layouts/role_layout";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import { useAuth } from "../lib/hooks/use_auth";
 import { useEffect, useState } from "react";
-import { Product, ResponseData, Sale } from "../lib/types";
+import { Customer, ResponseData, Sale } from "../lib/types";
 import TreeTable, { ColumnData } from "../lib/components/tree_table";
 import HttpClient from "../lib/utils/http_client";
-import VentasModal from "../lib/components/modals/ventasModal";
+import ClientesModal from "../lib/components/modals/clientesModal";
 import { toast } from "react-toastify";
 
-const Ventas = () => {
+const ClientesPage = () => {
   const { auth } = useAuth();
-  const [tableData, setTableData] = useState<Array<Sale>>([]);
+  const [tableData, setTableData] = useState<Array<Customer>>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [editingSale, setEditingSale] = useState<Sale | null>(null);
+  const [editingClientes, setEditingClientes] = useState<Customer | null>(null);
   const showModal = () => setModalVisible(true);
   const hideModal = async () => {
-    if (editingSale != null) setEditingSale(null);
+    if (editingClientes != null) setEditingClientes(null);
     setModalVisible(false);
     await loadData();
   };
 
   const loadData = async () => {
     const response = await HttpClient(
-      "/api/ventas",
+      "/api/client",
       "GET",
       auth.userName,
       auth.role
     );
     if (response.success) {
-      const ventas: Array<Sale> = response.data;
-      setTableData(ventas);
+      const clients: Array<Customer> = response.data;
+      setTableData(clients);
     } else {
       toast.warning(response.message);
     }
@@ -44,54 +44,31 @@ const Ventas = () => {
 
   const columns: ColumnData[] = [
     {
-      dataField: "saleDate",
-      caption: "Fecha de la venta",
-    },
-    {
-      dataField: "customer.name",
+      dataField: "name",
       caption: "Nombre",
     },
     {
-      dataField: "customer.email",
-      caption: "Email del cliente",
+      dataField: "email",
+      caption: "Correo",
     },
     {
-      dataField: "customer.phone",
-      caption: "Telefono del cliente",
+      dataField: "phone",
+      caption: "Telefono",
     },
     {
-      dataField: "totalPrice",
-      caption: "Valor Total",
-      cellRender: (params) => {
-        const factures: Array<Product> = params.value;
-        let total = 0;
-        if (factures?.length > 0)
-          factures?.forEach((item: Product) => {
-            total += item.price ?? 0;
-          });
-        const formato = total.toLocaleString(navigator.language, {
-          minimumFractionDigits: 2,
-        });
-        return (
-          <p style={{ margin: 2 }}>
-            <strong>${formato}</strong>
-          </p>
-        );
-      },
-      cssClass: "bold",
-      width: 100,
+      dataField: "address",
+      caption: "Direccion",
     },
   ];
 
   const buttons = {
     edit: (rowData: any) => {
-      Router.push({
-        pathname: "/ventas/edit/" + (rowData.id as string),
-      })
+      setEditingClientes(rowData);
+      showModal();
     },
     delete: async (rowData: any) => {
       await HttpClient(
-        "/api/ventas/" + rowData.id,
+        "/api/client/" + rowData.id,
         "DELETE",
         auth.userName,
         auth.role
@@ -107,7 +84,7 @@ const Ventas = () => {
   return (
     <>
       <RoleLayout permissions={[0, 4, 5]}>
-        <title>Ventas</title>
+        <title>Clientes</title>
         <div className="flex h-screen">
           <div className="md:w-1/6 max-w-none">
             <Sidebar />
@@ -125,7 +102,7 @@ const Ventas = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    VEN
+                    CLIEN
                   </em>
                   <em
                     style={{
@@ -135,7 +112,7 @@ const Ventas = () => {
                       fontFamily: "Lato",
                     }}
                   >
-                    TAS
+                    TES
                   </em>
                 </p>
                 <div className="flex justify-center gap-4">
@@ -144,13 +121,7 @@ const Ventas = () => {
                     onClick={showModal}
                     disabled={!CheckPermissions(auth, [0, 1])}
                   >
-                    Registrar nueva venta
-                  </button>
-                  <button
-                    className="text-center bg-transparent hover:bg-red-500 text-red-500 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded-full text-sm"
-                    onClick={handleAppClientes}
-                  >
-                    Clientes
+                    Registrar nuevo cliente
                   </button>
                 </div>
                 <TreeTable
@@ -177,22 +148,22 @@ const Ventas = () => {
         </div>
       </RoleLayout>
 
-      <VentasModal
+      <ClientesModal
         visible={modalVisible}
         close={hideModal}
-        initialData={editingSale}
-        onDone={async (newUser: Sale) => {
+        initialData={editingClientes}
+        onDone={async (newUser: Customer) => {
           const response: ResponseData =
-            editingSale == null
+            editingClientes == null
               ? await HttpClient(
-                  "/api/ventas",
+                  "/api/client",
                   "POST",
                   auth.userName,
                   auth.role,
                   newUser
                 )
               : await HttpClient(
-                  "/api/ventas",
+                  "/api/client",
                   "PUT",
                   auth.userName,
                   auth.role,
@@ -200,7 +171,9 @@ const Ventas = () => {
                 );
           if (response.success) {
             toast.success(
-              editingSale == null ? "Venta creada!" : "Venta actualizada!"
+              editingClientes == null
+                ? "Cliente creado!"
+                : "Cliente actualizado!"
             );
           } else {
             toast.warning(response.message);
@@ -210,4 +183,4 @@ const Ventas = () => {
     </>
   );
 };
-export default Ventas;
+export default ClientesPage;

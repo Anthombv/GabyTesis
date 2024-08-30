@@ -68,7 +68,7 @@ const FactureModal = (props: Props) => {
 
   const loadClients = async () => {
     const response: ResponseData = await HttpClient(
-      "/api/client/",
+      "/api/beneficiary/",
       "GET",
       auth.userName,
       auth.role

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import LoadingContainer from "../lib/components/loading_container";
-import ClientModal from "../lib/components/modals/client";
+import ClientModal from "../lib/components/modals/beneficiarios";
 import TreeTable, { ColumnData } from "../lib/components/tree_table";
 import { useAuth } from "../lib/hooks/use_auth";
 import { Beneficiary, ResponseData } from "../lib/types";
@@ -22,7 +22,7 @@ const BeneficiaryPage = () => {
   const loadData = async () => {
     setLoading(true);
     const response = await HttpClient(
-      "/api/client",
+      "/api/beneficiary",
       "GET",
       auth.userName,
       auth.role
@@ -319,14 +319,14 @@ const BeneficiaryPage = () => {
             const response: ResponseData =
               editingBeneficiary == null
                 ? await HttpClient(
-                    "/api/client",
+                    "/api/beneficiary",
                     "POST",
                     auth.userName,
                     auth.role,
                     newUser
                   )
                 : await HttpClient(
-                    "/api/client",
+                    "/api/beneficiary",
                     "PUT",
                     auth.userName,
                     auth.role,
