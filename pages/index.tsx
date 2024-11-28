@@ -58,7 +58,7 @@ export default function Home() {
                 fontWeight: "bold",
               }}
             >
-              <strong>Sistema Contable </strong> |{" "}
+              <strong>Sistema </strong> |{" "}
               <em
                 style={{
                   color: "#bb22dd",
@@ -66,7 +66,7 @@ export default function Home() {
                   fontSize: "26px",
                 }}
               >
-                "Comercial Torres"
+                "Comercial Torres" 
               </em>
               <hr
                 className="mt-0 ml-0 "
