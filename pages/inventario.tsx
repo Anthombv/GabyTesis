@@ -79,6 +79,22 @@ const InventarioPage = () => {
     setModalVisible(false);
     await loadData();
   };
+
+  const buttons = {
+    edit: (rowData: any) => {
+      setEditingProduct(rowData);
+      showModal();
+    },
+    delete: async (rowData: any) => {
+      await HttpClient(
+        "/api/client/" + rowData.id,
+        "DELETE",
+        auth.userName,
+        auth.role
+      );
+      await loadData();
+    },
+  };
   return (
     <>
       <title>Inventario de productos</title>
@@ -103,6 +119,7 @@ const InventarioPage = () => {
                 keyExpr="id"
                 dataSource={tableData}
                 columns={columns}
+                buttons={buttons}
                 searchPanel={true}
                 colors={{
                   headerBackground: "#F8F9F9",
