@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { GifContainer } from "./style";
+import GifContainer from "./style";
 
 type Props = {
   visible: boolean;

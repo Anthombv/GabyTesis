@@ -11,7 +11,7 @@ import TreeList, {
 } from "devextreme-react/tree-list";
 import { useEffect, useState } from "react";
 import { loadMessages } from "devextreme/localization";
-import { TableContainer, TableContainerProps } from "./styles";
+import TableContainer, { TableContainerProps } from "./styles";
 
 export type ColumnData = {
   dataField: string;

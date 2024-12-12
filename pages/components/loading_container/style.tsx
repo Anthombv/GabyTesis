@@ -4,7 +4,7 @@ type GifContainerProps = {
   miniVersion?: boolean;
 };
 
-export const GifContainer = styled.div`
+const GifContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,3 +13,4 @@ export const GifContainer = styled.div`
     else return "10em";
   }};
 `;
+export default GifContainer;

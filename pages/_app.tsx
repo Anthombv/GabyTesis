@@ -8,9 +8,9 @@ import { useEffect, useMemo, useState } from "react";
 import AuthContext from "../lib/contexts/auth_context";
 import { AuthContextProps, User } from "../model";
 import SessionLayout from "../pages/layouts/session_layout";
-import { ToastContainer } from "../pages/components/toastify";
 import { useNoScroll } from "../lib/hooks/use_no_scroll";
 import "../styles/global.css";
+import ToastContainer from "./components/toastify";
 
 // configuracion general de la app
 export default function App({ Component, pageProps }) {
