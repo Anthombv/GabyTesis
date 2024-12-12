@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import create from "../../../lib/mongo/solicitude/create";
-import update from "../../../lib/mongo/solicitude/update";
-import list from "../../../lib/mongo/solicitude/list";
+import create from "../../../controllers/solicitude/create";
+import update from "../../../controllers/solicitude/update";
+import list from "../../../controllers/solicitude/list";
 import dbConnect from "../../../lib/middlewares/mongo";
 
 export default async function handler(

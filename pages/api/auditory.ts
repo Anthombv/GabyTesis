@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../lib/middlewares/mongo";
-import { AuditoryModel } from "../../lib/mongo/schemas";
-import { Auditory } from "../../lib/types";
+import { Auditory } from "../../model";
+import { AuditoryModel } from "../../model/schemas";
 
 export default async function handler(
   req: NextApiRequest,

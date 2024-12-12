@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../lib/components/sidebar";
+import Sidebar from "../pages/components/sidebar";
 import { useAuth } from "../lib/hooks/use_auth";
-import ProvidersModal from "../lib/components/modals/providersModal";
-import ProyectsModal from "../lib/components/modals/projects";
-import RoleLayout from "../lib/layouts/role_layout";
+import ProvidersModal from "../pages/components/modals/providersModal";
+import ProyectsModal from "../pages/components/modals/projects";
+import RoleLayout from "../pages/layouts/role_layout";
 
 const Reportes = () => {
   const { auth } = useAuth();

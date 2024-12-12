@@ -1,7 +1,7 @@
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../lib/hooks/use_auth";
-import { Facture, ResponseData, Solicitude } from "../../../lib/types";
+import { Facture, ResponseData, Solicitude } from "../../../model";
 import HttpClient from "../../../lib/utils/http_client";
 import { saveAs } from "file-saver";
 

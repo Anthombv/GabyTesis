@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Router from "next/router";
 import { useEffect, useState } from "react";
-import LoadingContainer from "../../../lib/components/loading_container";
+import LoadingContainer from "../../../pages/components/loading_container";
 import { useAuth } from "../../../lib/hooks/use_auth";
 import theme from "../../../lib/styles/theme";
-import { ResponseData, Solicitude } from "../../../lib/types";
+import { ResponseData, Solicitude } from "../../../model";
 import HttpClient from "../../../lib/utils/http_client";
 
 const ExcelSolicitude = () => {

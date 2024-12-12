@@ -4,8 +4,8 @@ import { useAuth } from "../../lib/hooks/use_auth";
 import Router from "next/router";
 import { useWindowSize } from "../../lib/hooks/use_window_size";
 import { useReactToPrint } from "react-to-print";
-import LoadingContainer from "../../lib/components/loading_container";
-import { Facture, Solicitude } from "../../lib/types";
+import LoadingContainer from "../../pages/components/loading_container";
+import { Facture, Solicitude } from "../../model";
 
 const GeneralReportHistory = () => {
   const { auth } = useAuth();

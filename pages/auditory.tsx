@@ -1,11 +1,11 @@
-import RoleLayout from "../lib/layouts/role_layout";
+import RoleLayout from "../pages/layouts/role_layout";
 import { useEffect, useState } from "react";
-import TreeTable, { ColumnData } from "../lib/components/tree_table";
-import LoadingContainer from "../lib/components/loading_container";
+import TreeTable, { ColumnData } from "../pages/components/tree_table";
+import LoadingContainer from "../pages/components/loading_container";
 import { useAuth } from "../lib/hooks/use_auth";
 import HttpClient from "../lib/utils/http_client";
-import { Auditory } from "../lib/types";
-import Sidebar from "../lib/components/sidebar";
+import { Auditory } from "../model";
+import Sidebar from "../pages/components/sidebar";
 
 const AuditoryPage = () => {
   const { auth } = useAuth();

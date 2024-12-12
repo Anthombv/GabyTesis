@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../lib/hooks/use_auth";
-import { Product, ResponseData } from "../lib/types";
-import Sidebar from "../lib/components/sidebar";
-import LoadingContainer from "../lib/components/loading_container";
-import TreeTable, { ColumnData } from "../lib/components/tree_table";
+import { Product, ResponseData } from "../model";
+import Sidebar from "../pages/components/sidebar";
+import LoadingContainer from "../pages/components/loading_container";
+import TreeTable, { ColumnData } from "../pages/components/tree_table";
 import { Button } from "react-bootstrap";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import HttpClient from "../lib/utils/http_client";
 import { toast } from "react-toastify";
-import ProductModal from "../lib/components/modals/productModal";
+import ProductModal from "../pages/components/modals/productModal";
 
 const InventarioPage = () => {
   const { auth } = useAuth();

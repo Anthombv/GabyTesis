@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { AuthContextProps } from "../types";
+import { AuthContextProps } from "../../model";
 
 // contexto de sesion de la app
 const AuthContext = createContext<AuthContextProps>({

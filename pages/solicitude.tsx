@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../lib/hooks/use_auth";
-import { Facture, Solicitude } from "../lib/types";
+import { Facture, Solicitude } from "../model";
 import HttpClient from "../lib/utils/http_client";
-import TreeTable, { ColumnData } from "../lib/components/tree_table";
+import TreeTable, { ColumnData } from "../pages/components/tree_table";
 import { StateField } from "../lib/styles/views/indexStyled";
 import { Elaborando, Pendiente } from "../lib/utils/constants";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import Router from "next/router";
 import { toast } from "react-toastify";
-import RoleLayout from "../lib/layouts/role_layout";
-import Sidebar from "../lib/components/sidebar";
+import RoleLayout from "../pages/layouts/role_layout";
+import Sidebar from "../pages/components/sidebar";
 import { Button, TabContainer } from "react-bootstrap";
-import ConfirmModal from "../lib/components/modals/confirm";
-import LoadingContainer from "../lib/components/loading_container";
+import ConfirmModal from "../pages/components/modals/confirm";
+import LoadingContainer from "../pages/components/loading_container";
 
 type Props = {
   dates: Array<string>;

@@ -1,8 +1,8 @@
 import Router from "next/router";
 import { useEffect, useState } from "react";
-import LoadingContainer from "../../lib/components/loading_container";
+import LoadingContainer from "../../pages/components/loading_container";
 import { useAuth } from "../../lib/hooks/use_auth";
-import { Facture, Solicitude } from "../../lib/types";
+import { Facture, Solicitude } from "../../model";
 import { CheckPermissions } from "../../lib/utils/check_permissions";
 import HttpClient from "../../lib/utils/http_client";
 

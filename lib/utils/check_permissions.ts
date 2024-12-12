@@ -1,4 +1,4 @@
-import { User, UserRole } from "../types"
+import { User, UserRole } from "../../model"
 
 const CheckPermissions = (auth: User, permissions: Array<UserRole>): boolean => {
   if(!auth) return false

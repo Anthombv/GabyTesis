@@ -6,9 +6,9 @@ import theme from "../lib/styles/theme";
 import { useLocalStorage } from "../lib/hooks/use_local_storage";
 import { useEffect, useMemo, useState } from "react";
 import AuthContext from "../lib/contexts/auth_context";
-import { AuthContextProps, User } from "../lib/types";
-import SessionLayout from "../lib/layouts/session_layout";
-import { ToastContainer } from "../lib/components/toastify";
+import { AuthContextProps, User } from "../model";
+import SessionLayout from "../pages/layouts/session_layout";
+import { ToastContainer } from "../pages/components/toastify";
 import { useNoScroll } from "../lib/hooks/use_no_scroll";
 import "../styles/global.css";
 

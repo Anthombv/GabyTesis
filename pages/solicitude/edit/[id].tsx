@@ -5,27 +5,27 @@ import {
   Solicitude,
   Comment,
   CloudImage,
-} from "../../../lib/types";
-import TreeTable, { ColumnData } from "../../../lib/components/tree_table";
+} from "../../../model";
+import TreeTable, { ColumnData } from "../../../pages/components/tree_table";
 import { useFormik } from "formik";
 import HttpClient from "../../../lib/utils/http_client";
 import { toast } from "react-toastify";
 import Router from "next/router";
-import ConfirmModal from "../../../lib/components/modals/confirm";
-import FactureModal from "../../../lib/components/modals/facture";
-import LoadingContainer from "../../../lib/components/loading_container";
+import ConfirmModal from "../../../pages/components/modals/confirm";
+import FactureModal from "../../../pages/components/modals/facture";
+import LoadingContainer from "../../../pages/components/loading_container";
 import { UploadSolicitudeImages } from "../../../lib/utils/upload_solicitude_images";
 import ImageModal, {
   ImageModalProps,
-} from "../../../lib/components/modals/image";
+} from "../../../pages/components/modals/image";
 import { useAuth } from "../../../lib/hooks/use_auth";
 import {
   CheckFinished,
   CheckPermissions,
 } from "../../../lib/utils/check_permissions";
-import TabContainer, { TabPanel } from "../../../lib/components/tab_container";
-import SoliciterPanel from "../../../lib/layouts/edit_solicitude/soliciter";
-import FinancialPanel from "../../../lib/layouts/edit_solicitude/financial";
+import TabContainer, { TabPanel } from "../../../pages/components/tab_container";
+import SoliciterPanel from "../../../pages/layouts/edit_solicitude/soliciter";
+import FinancialPanel from "../../../pages/layouts/edit_solicitude/financial";
 import {
   Aprobado,
   Elaborando,
@@ -34,11 +34,11 @@ import {
 } from "../../../lib/utils/constants";
 import { FinanField } from "../../../lib/styles/views/financialStyled";
 import FormatedDate from "../../../lib/utils/formated_date";
-import ComentModal from "../../../lib/components/modals/coment";
+import ComentModal from "../../../pages/components/modals/coment";
 import { useForm } from "react-hook-form";
 import StatusSolicitude from "../status/[id]";
 import { FaEdit, FaTrashAlt, FaEye } from "react-icons/fa";
-import Sidebar from "../../../lib/components/sidebar";
+import Sidebar from "../../../pages/components/sidebar";
 import { alignPropType } from "react-bootstrap/esm/types";
 
 // Inicio de la app

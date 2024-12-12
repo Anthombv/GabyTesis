@@ -5,26 +5,26 @@ import {
   Solicitude,
   Comment,
   CloudImage,
-} from "../../../lib/types";
-import TreeTable, { ColumnData } from "../../../lib/components/tree_table";
+} from "../../../model";
+import TreeTable, { ColumnData } from "../../../pages/components/tree_table";
 import { useFormik } from "formik";
 import HttpClient from "../../../lib/utils/http_client";
 import { toast } from "react-toastify";
 import Router from "next/router";
-import LoadingContainer from "../../../lib/components/loading_container";
+import LoadingContainer from "../../../pages/components/loading_container";
 import { UploadSolicitudeImages } from "../../../lib/utils/upload_solicitude_images";
 import ImageModal, {
   ImageModalProps,
-} from "../../../lib/components/modals/image";
+} from "../../../pages/components/modals/image";
 import { useAuth } from "../../../lib/hooks/use_auth";
 import { Elaborando, Pendiente, Abierto } from "../../../lib/utils/constants";
 import { FinanField } from "../../../lib/styles/views/financialStyled";
 import FormatedDate from "../../../lib/utils/formated_date";
 import { CheckPermissions } from "../../../lib/utils/check_permissions";
-import FactureModal from "../../../lib/components/modals/facture";
-import ConfirmModal from "../../../lib/components/modals/confirm";
-import ComentModal from "../../../lib/components/modals/coment";
-import Sidebar from "../../../lib/components/sidebar";
+import FactureModal from "../../../pages/components/modals/facture";
+import ConfirmModal from "../../../pages/components/modals/confirm";
+import ComentModal from "../../../pages/components/modals/coment";
+import Sidebar from "../../../pages/components/sidebar";
 
 // Inicio de la app
 const EditFacture = () => {

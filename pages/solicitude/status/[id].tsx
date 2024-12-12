@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Router from "next/router";
 import { useAuth } from "../../../lib/hooks/use_auth";
-import { ModalProps, ResponseData, Solicitude } from "../../../lib/types";
+import { ModalProps, ResponseData, Solicitude } from "../../../model";
 import HttpClient from "../../../lib/utils/http_client";
 import { useFormik } from "formik";
 import theme from "../../../lib/styles/theme";

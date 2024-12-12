@@ -1,13 +1,13 @@
 import Router from "next/router";
-import Sidebar from "../lib/components/sidebar";
-import RoleLayout from "../lib/layouts/role_layout";
+import Sidebar from "../pages/components/sidebar";
+import RoleLayout from "../pages/layouts/role_layout";
 import { CheckPermissions } from "../lib/utils/check_permissions";
 import { useAuth } from "../lib/hooks/use_auth";
 import { useEffect, useState } from "react";
-import { Customer, ResponseData, Sale } from "../lib/types";
-import TreeTable, { ColumnData } from "../lib/components/tree_table";
+import { Customer, ResponseData, Sale } from "../model";
+import TreeTable, { ColumnData } from "../pages/components/tree_table";
 import HttpClient from "../lib/utils/http_client";
-import ClientesModal from "../lib/components/modals/clientesModal";
+import ClientesModal from "../pages/components/modals/clientesModal";
 import { toast } from "react-toastify";
 
 const ClientesPage = () => {

@@ -1,4 +1,4 @@
-import { ResponseData } from "../types";
+import { ResponseData } from "../../model";
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE'
 

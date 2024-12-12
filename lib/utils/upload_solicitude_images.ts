@@ -1,5 +1,5 @@
 import uploadFile from "../firebase/uploadFile";
-import { CloudImage, Facture } from "../types";
+import { CloudImage, Facture } from "../../model";
 
 const checkFile = (file: File | CloudImage): boolean => {
   return (file as CloudImage)?.secure_url !== undefined ? true : false

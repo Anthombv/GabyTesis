@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { ResponseData, Facture, Solicitude } from "../../../lib/types";
-import TreeTable, { ColumnData } from "../../../lib/components/tree_table";
+import { ResponseData, Facture, Solicitude } from "../../../model";
+import TreeTable, { ColumnData } from "../../../pages/components/tree_table";
 import { useAuth } from "../../../lib/hooks/use_auth";
 import FormatedDate from "../../../lib/utils/formated_date";
 import { useFormik } from "formik";
 import Router from "next/router";
 import HttpClient from "../../../lib/utils/http_client";
 import { toast } from "react-toastify";
-import ConfirmModal from "../../../lib/components/modals/confirm";
-import FactureModal from "../../../lib/components/modals/facture";
-import LoadingContainer from "../../../lib/components/loading_container";
+import ConfirmModal from "../../../pages/components/modals/confirm";
+import FactureModal from "../../../pages/components/modals/facture";
+import LoadingContainer from "../../../pages/components/loading_container";
 import { UploadSolicitudeImages } from "../../../lib/utils/upload_solicitude_images";
-import RoleLayout from "../../../lib/layouts/role_layout";
+import RoleLayout from "../../../pages/layouts/role_layout";
 import { Abierto, Elaborando, Pendiente } from "../../../lib/utils/constants";
-import Sidebar from "../../../lib/components/sidebar";
+import Sidebar from "../../../pages/components/sidebar";
 
 // Inicio de la app
 const NewFacture = () => {

@@ -2,11 +2,11 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Router from "next/router";
-import Sidebar from "../lib/components/sidebar";
+import Sidebar from "../pages/components/sidebar";
 import { useAuth } from "../lib/hooks/use_auth";
 import { toast } from "react-toastify";
 import { CheckPermissions } from "../lib/utils/check_permissions";
-import GeneralReportModal from "../lib/components/modals/generalReport";
+import GeneralReportModal from "../pages/components/modals/generalReport";
 import { useState } from "react";
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
                 fontWeight: "bold",
               }}
             >
-              <strong>Sistema </strong> |{" "}
+              <strong>Sistema Contable </strong> |{" "}
               <em
                 style={{
                   color: "#bb22dd",

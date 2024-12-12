@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Router from "next/router";
 import { useAuth } from "../lib/hooks/use_auth";
-import TabContainer, { TabPanel } from "../lib/components/tab_container";
-import SolicitudeICHistoryPanel from "../lib/layouts/companyHistory/torres";
+import TabContainer, { TabPanel } from "../pages/components/tab_container";
+import SolicitudeICHistoryPanel from "../pages/layouts/companyHistory/torres";
 import { CheckPermissions } from "../lib/utils/check_permissions";
-import Sidebar from "../lib/components/sidebar";
-import RoleLayout from "../lib/layouts/role_layout";
+import Sidebar from "../pages/components/sidebar";
+import RoleLayout from "../pages/layouts/role_layout";
 
 // Inicio de la app
 const SolicitudeHistory = () => {

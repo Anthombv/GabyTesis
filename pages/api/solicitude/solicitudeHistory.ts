@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/middlewares/mongo";
-import { SolicitudeModel } from "../../../lib/mongo/schemas";
-import { Solicitude } from "../../../lib/types";
+import { Solicitude } from "../../../model";
 import { Aprobado } from "../../../lib/utils/constants";
+import { SolicitudeModel } from "../../../model/schemas";
 
 export default async function handler(
   req: NextApiRequest,

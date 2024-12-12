@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../lib/hooks/use_auth";
-import { Product, ResponseData, Sale } from "../../../lib/types";
+import { Product, ResponseData, Sale } from "../../../model";
 import FormatedDate from "../../../lib/utils/formated_date";
 import Router from "next/router";
 import HttpClient from "../../../lib/utils/http_client";
 import { toast } from "react-toastify";
-import TreeTable, { ColumnData } from "../../../lib/components/tree_table";
-import Sidebar from "../../../lib/components/sidebar";
+import TreeTable, { ColumnData } from "../../../pages/components/tree_table";
+import Sidebar from "../../../pages/components/sidebar";
 import { useFormik } from "formik";
-import NewProductModal from "../../../lib/components/modals/newProductModal";
+import NewProductModal from "../../../pages/components/modals/newProductModal";
 
 const EditVenta = () => {
   const { auth } = useAuth();

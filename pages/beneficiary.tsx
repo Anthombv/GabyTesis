@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import LoadingContainer from "../lib/components/loading_container";
-import ClientModal from "../lib/components/modals/beneficiarios";
-import TreeTable, { ColumnData } from "../lib/components/tree_table";
+import LoadingContainer from "../pages/components/loading_container";
+import ClientModal from "../pages/components/modals/beneficiarios";
+import TreeTable, { ColumnData } from "../pages/components/tree_table";
 import { useAuth } from "../lib/hooks/use_auth";
-import { Beneficiary, ResponseData } from "../lib/types";
+import { Beneficiary, ResponseData } from "../model";
 import HttpClient from "../lib/utils/http_client";
-import Sidebar from "../lib/components/sidebar";
+import Sidebar from "../pages/components/sidebar";
 import Router from "next/router";
 import { CheckPermissions } from "../lib/utils/check_permissions";
-import RoleLayout from "../lib/layouts/role_layout";
+import RoleLayout from "../pages/layouts/role_layout";
 
 const BeneficiaryPage = () => {
   const { auth } = useAuth();

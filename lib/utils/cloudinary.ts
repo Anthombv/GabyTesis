@@ -1,5 +1,5 @@
 // import { v2 as cloudinary } from "cloudinary";
-import { CloudImage, Facture, Solicitude } from "../types";
+import { CloudImage, Facture, Solicitude } from "../../model";
 
 //TODO: eliminar imagen
 const cloudName = "diyrzpo9t";
