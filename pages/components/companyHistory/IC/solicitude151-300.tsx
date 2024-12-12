@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import LoadingContainer from "../../../components/loading_container";
 import TreeTable, { ColumnData } from "../../../components/tree_table";
-import { useAuth } from "../../../hooks/use_auth";
-import { StateField } from "../../../styles/views/indexStyled";
-import { Facture, Solicitude } from "../../../../model";
-import { CheckPermissions } from "../../../utils/check_permissions";
-import { Elaborando, Pendiente } from "../../../utils/constants";
-import HttpClient from "../../../utils/http_client";
+import { useAuth } from "../../../../lib/hooks/use_auth";
+import { StateField } from "../../../../lib/styles/views/indexStyled";
+import { CheckPermissions } from "../../../../lib/utils/check_permissions";
+import { Elaborando, Pendiente } from "../../../../lib/utils/constants";
+import HttpClient from "../../../../lib/utils/http_client";
+import { Solicitude, Facture } from "../../../../model";
 
 type Props = {
   dates: Array<string>;
