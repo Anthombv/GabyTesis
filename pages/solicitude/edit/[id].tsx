@@ -117,20 +117,20 @@ const EditFacture = () => {
         items: factureItems,
         id: solicitudeId,
       };
-      const response: ResponseData = await HttpClient(
-        "/api/solicitude",
-        "PUT",
-        auth.userName,
-        auth.role,
-        requestData
-      );
-      if (response.success) {
-        toast.success("Solicitud editada correctamente!");
-        await loadData();
-      } else {
-        toast.warning(response.message);
-      }
-      setLoading(false);
+     // const response: ResponseData = await HttpClient(
+     //   "/api/solicitude",
+     //   "PUT",
+     //   auth.userName,
+     //   auth.role,
+     //   requestData
+     // );
+     // if (response.success) {
+     //   toast.success("Solicitud editada correctamente!");
+     //   await loadData();
+     // } else {
+     //   toast.warning(response.message);
+     // }
+     // setLoading(false);
     } else {
       setTimeout(onSubmit, 1000);
     }

@@ -125,6 +125,7 @@ export type Comment = {
 
 //Solicitudes de pago a proveedores
 export interface Solicitude {
+  total?: number;
   id?: string;
   number: number;
   soliciter: string;
